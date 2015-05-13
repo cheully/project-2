@@ -1,0 +1,9 @@
+tr
+	each val, key in list
+		if (key === "ADMINURL" || key === "APPLURL" || key === "FAIDURL" || key === "NPRICURL" || key === "WEBADDR")
+			td
+				a(href="//#{val}") #{val}
+		
+		else 
+			td #{val}
+		

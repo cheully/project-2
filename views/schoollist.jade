@@ -1,0 +1,11 @@
+extends layout
+
+block content
+	h1 #{schoolTitle} #{title}
+	
+	include headings
+	
+	#wrapper
+	
+	div(id="linkToCharts", style="font-size:20px")
+		a(href="/chart/#{list.UNITID}") Click here to view more information on this institution

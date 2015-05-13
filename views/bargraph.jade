@@ -1,0 +1,84 @@
+extends layout
+
+
+block content
+	script(src='/scripts/barGraphValues.js')
+	
+	h1 #{title}
+	
+	
+	a(id="text", href="/testPage") Click here to view the QUnit tests 
+	
+	div(id="barchart")
+	
+	script
+		
+		var data = !{JSON.stringify(topSchools)},
+			xData = create_xData(data), 
+			enrollData = create_enrollData(data);
+
+		var chart = c3.generate({
+			bindto: '#barchart',
+			size: {
+				height : 500,
+				padding : 20
+			},
+			
+			data: {
+			x: 'x',
+			
+			columns: [
+					xData,
+					enrollData
+			],
+
+			type: 'bar',
+			
+			onclick: function (d, element) { window.location.href= "/chart/" + data[d['x']].UNITID; }
+			},
+			
+			bar: {
+				width: 25,
+				color:'green'
+			},
+			
+			legend: {
+				show: false
+			},
+			
+			tooltip: {
+			
+				position: function (data, width, height, element) {
+					return {top: 300, left: 1000}
+				}
+			},
+			
+			axis: {
+				rotated: true,
+				x: {
+					type: 'category',
+					categories: xData.slice(1,-1),
+					
+					label: {
+						text: "Institutions",
+						position: 'outer-middle'
+					}
+				},
+				
+				y : {
+				
+					label: {
+							text: "Total Enrollments (people)",
+							position: 'outer-middle',
+							
+							tick: {
+								format: d3.format(",")
+							}
+					}
+				
+				}
+			}
+			
+		});
+		
+		

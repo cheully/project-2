@@ -1,0 +1,90 @@
+extends layout
+
+block content
+	h1 #{title}
+	
+	div(id="main")
+		button(id="enrollment") Enrollment Statistics
+		
+		#wrapper
+		button(id="tuition") Tuition Statistics
+		
+		div(id="enrollment_upload", style="display:none")
+		
+			p Please upload a #{filetype} file
+			
+			form(id="upload", enctype="multipart/form-data", method="post", action="#{location}/enrollment-uploaded", onsubmit="return validate()")
+				
+				input(id="fileupload", name="csvFile", type="file", accept=".csv,.txt,.xls,.xlsx")
+				
+				input(type="submit", value="Submit", id="submit")
+				
+		div(id="tuition_upload", style="display:none")
+		
+			p Please upload multiple #{filetype} files one at a time
+			
+			form(id="upload", enctype="multipart/form-data", method="post", action="#{location}/tuition-uploaded", onsubmit="return validate2()")
+				
+				input(id="fileupload2", name="csvFile", type="file", accept=".csv,.txt,.xls,.xlsx")
+				
+				input(type="submit", value="Submit", id="submit")
+	
+	div(id="load")
+	div(id="gif", style="display:none")
+		img(id="gif", src = "http://38.media.tumblr.com/345127a42a4baf76158920730f808f3b/tumblr_nak5muSmwi1r2geqjo1_500.gif", height="200", width="200" )
+	
+	script
+		var numClicks = 0;
+		$('#enrollment').click( function() {
+			numClicks += 1;
+			
+			if (numClicks%2 === 1){
+				document.getElementById("enrollment_upload").style.display = "block";
+				document.getElementById("tuition").style.display = "none";
+			} else {
+				document.getElementById("enrollment_upload").style.display = "none";
+				document.getElementById("tuition").style.display = "block";
+			}
+		});
+		
+		$('#tuition').click( function() {
+			numClicks += 1;
+			
+			if (numClicks%2 === 1){
+				document.getElementById("tuition_upload").style.display = "block";
+				document.getElementById("enrollment").style.display = "none";
+			} else {
+				document.getElementById("tuition_upload").style.display = "none";
+				document.getElementById("enrollment").style.display = "block";
+			}
+		});
+		
+		function validate () {
+			if(document.getElementById('fileupload').value === "") {
+				alert('No file selected! Please choose a file');
+				return false;	
+			} else {
+				document.getElementById("main").style.display = "none";
+				
+				document.getElementById('load').innerHTML = " File is currently being loaded into mongoDB ";
+				document.getElementById("gif").style.display = "block";
+				
+				return true;
+			}
+			
+		}
+		
+		function validate2 () {
+			if(document.getElementById('fileupload2').value === "") {
+				alert('No file selected! Please choose a file');
+				return false;	
+			} else {
+				document.getElementById("main").style.display = "none";
+				
+				document.getElementById('load').innerHTML = " File is currently being loaded into mongoDB ";
+				document.getElementById("gif").style.display = "block";
+				
+				return true;
+			}
+			
+		}
