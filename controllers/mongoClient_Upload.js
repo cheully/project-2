@@ -174,7 +174,7 @@ module.exports = {
 				
 				
 				Model.update({'UNITID': records[i]['UNITID']}, {$push: obj2}, function(err, doc) {
-					console.log("Updated "+ records[i-1]['UNITID'] + " with the following enrollment information: ", JSON.stringify(obj2));
+					console.log("Updated  with the following enrollment information: ", JSON.stringify(obj2));
 					console.log(doc);
 				});
 	
