@@ -32,7 +32,8 @@ exports.bargraph = function(req, res) {
 				break;
 		}
 		
-		console.log("List to send to jade view: " + list);
+		console.log("List to send to jade view: ");
+		console.log(list);
 		// Render bargraph with the title and lists
 		res.render('bargraph', {title: 'The Top 10 Institutions', topSchools: list});
 	});
@@ -69,7 +70,8 @@ exports.viewInfo = function(req, res) {
 				}
 			}
 		}
-		console.log("List to send to jade view: " + list.sort());
+		console.log("List to send to jade view: ");
+		console.log(list.sort());
 		// Render bargraph with the title and lists
 		res.render('moregraphs', {title: longTitle, institutionInfo: list});
 	});
