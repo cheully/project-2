@@ -1,3 +1,4 @@
+
 module.exports = {
 	
 	mongoUpload : function(name, records, res) {
@@ -44,7 +45,7 @@ module.exports = {
 			function insertOne(i) {
 				if (name === "frequencies") {
 			
-					Model.insert(records[i], function (err, doc) {
+					Model.save(records[i], function (err, doc) {
 						console.log("Saved the information "+ records[i]["valuelabel"] + " for field " + records[i]["varname"]);
 						
 					});
